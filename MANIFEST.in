@@ -1,0 +1,30 @@
+include LICENSE
+include CHANGELOG.md
+include README.md
+include pyproject.toml
+include setup.py
+
+graft geonode_scraper_sdk
+
+prune .github
+prune .openapi-generator
+prune docs
+prune geonode_scraper_sdk.egg-info
+prune scripts
+prune test
+prune tests
+
+exclude .gitignore
+exclude .gitlab-ci.yml
+exclude .openapi-generator-ignore
+
+global-exclude __pycache__
+global-exclude *.py[cod]
+
+include CONTRIBUTING.md SECURITY.md openapi.json config.json
+recursive-include assets *.svg
+recursive-include docs *.md
+recursive-include scripts *.sh *.py
+recursive-include openapi-generator *
+include .openapi-generator/VERSION .openapi-generator-ignore
+recursive-include tests *.py

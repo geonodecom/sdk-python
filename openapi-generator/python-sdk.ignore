@@ -1,0 +1,31 @@
+# Repo-owned files inside python-sdk/.
+.openapi-generator/FILES
+.openapi-generator-ignore
+.github/**
+.gitignore
+.gitlab-ci.yml
+.travis.yml
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.md
+docs/**
+geonode_scraper_sdk_README.md
+git_push.sh
+pyproject.toml
+requirements.txt
+scripts/**
+setup.cfg
+setup.py
+test/**
+tests/**
+test-requirements.txt
+tox.ini
+
+# Standalone repository documentation and contract
+assets/**
+CONTRIBUTING.md
+SECURITY.md
+openapi.json
+openapi-generator/**
+docs/**
