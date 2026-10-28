@@ -101,7 +101,7 @@ python -m build
 python -m twine check dist/*
 ```
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow and [source provenance](docs/source-provenance.md) for regeneration and release migration. Package publishing remains in the original SDK monorepo until the release configuration is migrated. This repository does not publish automatically.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow, code generation and releases.
 
 ## Support and license
 
