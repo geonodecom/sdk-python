@@ -6,9 +6,11 @@ The format is inspired by Keep a Changelog.
 
 ## [Unreleased]
 
+- Removed the internal repository preparation notes and links to the old monorepo.
+
 - Docs links point to the package's page at https://docs.geonode.com/docs/scraper-api/guides/sdks/python.
 
-- Prepare standalone source repository with preserved history, documentation and self-contained maintainer tooling. Package name and version are unchanged.
+- Prepare standalone source repository with documentation and self-contained maintainer tooling. Package name and version are unchanged.
 
 
 - README rewritten so it can be published as the Python SDK page on docs.geonode.com: setup, common tasks including background jobs and webhooks, request options, errors and a method reference. The examples no longer set a placeholder `host`, so they call the production API as written.
