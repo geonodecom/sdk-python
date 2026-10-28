@@ -1,6 +1,6 @@
 [project]
 name = "geonode-scraper-sdk"
-version = "0.6.1"
+version = "0.6.2"
 description = "Build web scraping pipelines in Python with typed clients that extract Markdown or HTML, crawl websites, discover URLs and search through the Geonode API."
 authors = [
   {name = "Geonode Team"},
