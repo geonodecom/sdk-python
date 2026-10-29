@@ -1,6 +1,6 @@
 # Geonode Scraper SDK for Python
 
-[Integrations page](https://geonode.com/integrations) · [Geonode API docs](https://docs.geonode.com/docs/scraper-api) · [GitHub source](https://github.com/geonodecom/sdk-python) · [Python SDK setup guide](https://docs.geonode.com/docs/scraper-api/guides/sdks/python) · [Published package](https://pypi.org/project/geonode-scraper-sdk/) · [Repository overview](../README.md)
+[Integrations page](https://geonode.com/integrations/sdk-python) · [Geonode API docs](https://docs.geonode.com/docs/scraper-api) · [GitHub source](https://github.com/geonodecom/sdk-python) · [Python SDK setup guide](https://docs.geonode.com/docs/scraper-api/guides/sdks/python) · [Published package](https://pypi.org/project/geonode-scraper-sdk/) · [Repository overview](../README.md)
 
 **[Try Geonode for free](https://app.geonode.com/sign-up)**
 

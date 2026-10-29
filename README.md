@@ -6,7 +6,7 @@ Build Python agents and data pipelines with Geonode’s typed clients. Extract p
 
 **[Try Geonode for free](https://app.geonode.com/sign-up)**
 
-[Integrations page](https://geonode.com/integrations) · [Geonode API docs](https://docs.geonode.com/docs/scraper-api) · [Python SDK setup guide](https://docs.geonode.com/docs/scraper-api/guides/sdks/python) · [View package on PyPI](https://pypi.org/project/geonode-scraper-sdk/) · [View source on GitHub](https://github.com/geonodecom/sdk-python) · [Complete guide](docs/guide.md)
+[Integrations page](https://geonode.com/integrations/sdk-python) · [Geonode API docs](https://docs.geonode.com/docs/scraper-api) · [Python SDK setup guide](https://docs.geonode.com/docs/scraper-api/guides/sdks/python) · [View package on PyPI](https://pypi.org/project/geonode-scraper-sdk/) · [View source on GitHub](https://github.com/geonodecom/sdk-python) · [Complete guide](docs/guide.md)
 
 <!-- BEGIN README NAV -->
 [Get started](#get-started) · [Example: prepare website content for retrieval](#example-prepare-website-content-for-retrieval) · [Setup questions](#setup-questions)
