@@ -45,6 +45,8 @@ def test_extraction_error_code_all_values():
         "INTERNAL_ERROR",
         "PROXY_ERROR",
         "CANCELLED",
+        "TARGET_BLOCKED",
+        "GOOGLE_SEARCH_MOVED",
     }
     actual = {member.value for member in ExtractionErrorCode}
     assert actual == expected
