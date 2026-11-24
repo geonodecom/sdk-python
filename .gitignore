@@ -68,6 +68,8 @@ target/
 # OpenAPI generator bookkeeping
 .openapi-generator/FILES
 geonode_scraper_sdk_README.md
+# scripts/generate.sh runs the generator through `uv run`, which writes a lock file this repo does not track
+uv.lock
 
 # Local development and credentials
 .venv/

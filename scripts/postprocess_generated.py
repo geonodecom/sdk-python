@@ -30,6 +30,16 @@ def apply_replacements(path: Path, replacements: list[tuple[str, str]]) -> bool:
     return True
 
 
+def normalize_whitespace(path: Path) -> bool:
+    """Drop trailing spaces and end the file with exactly one newline, as the committed sources do."""
+    original = path.read_text()
+    updated = "\n".join(line.rstrip(" \t") for line in original.split("\n")).rstrip("\n") + "\n"
+    if updated == original:
+        return False
+    path.write_text(updated)
+    return True
+
+
 def main() -> None:
     changed_files: list[Path] = []
 
@@ -149,6 +159,11 @@ def main() -> None:
     for path, replacements in replacement_map.items():
         if apply_replacements(path, replacements):
             changed_files.append(path)
+
+    # The generator leaves trailing spaces and blank lines; trimming them keeps regeneration diffs to real changes.
+    trimmed = sum(normalize_whitespace(path) for path in sorted((SDK_DIR / "geonode_scraper_sdk").rglob("*.py")))
+    if trimmed:
+        print(f"Trimmed trailing whitespace in {trimmed} generated files.")
 
     if changed_files:
         print("Postprocessed generated Python SDK files:")
