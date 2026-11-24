@@ -32,13 +32,13 @@ jobs:
 
     steps:
       # No credentials are kept in .git/config while third-party tools run; the bot token is minted only to push.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -82,7 +82,8 @@ jobs:
         if: steps.sync.outputs.changed == 'true'
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          app-id: ${{ vars.INTEGRATIONS_BOT_APP_ID }}
+          # Public Client ID of the geonode-internal-integrations-bot App; `app-id` is deprecated in this action.
+          client-id: Iv23liVguZMcHwiYcaIm
           private-key: ${{ secrets.INTEGRATIONS_BOT_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
