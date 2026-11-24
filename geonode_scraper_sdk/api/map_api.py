@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Any, Optional
 from typing_extensions import Annotated
 from uuid import UUID
@@ -316,7 +316,6 @@ class MapApi:
     @validate_call
     def list_map_jobs_v1_map_jobs_get(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by base URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -339,8 +338,6 @@ class MapApi:
 
         List map jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by base URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -374,7 +371,6 @@ class MapApi:
         """ # noqa: E501
 
         _param = self._list_map_jobs_v1_map_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -388,6 +384,7 @@ class MapApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MapJobsResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '422': "HTTPValidationError",
         }
@@ -405,7 +402,6 @@ class MapApi:
     @validate_call
     def list_map_jobs_v1_map_jobs_get_with_http_info(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by base URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -428,8 +424,6 @@ class MapApi:
 
         List map jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by base URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -463,7 +457,6 @@ class MapApi:
         """ # noqa: E501
 
         _param = self._list_map_jobs_v1_map_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -477,6 +470,7 @@ class MapApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MapJobsResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '422': "HTTPValidationError",
         }
@@ -494,7 +488,6 @@ class MapApi:
     @validate_call
     def list_map_jobs_v1_map_jobs_get_without_preload_content(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by base URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -517,8 +510,6 @@ class MapApi:
 
         List map jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by base URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -552,7 +543,6 @@ class MapApi:
         """ # noqa: E501
 
         _param = self._list_map_jobs_v1_map_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -566,6 +556,7 @@ class MapApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MapJobsResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '422': "HTTPValidationError",
         }
@@ -578,7 +569,6 @@ class MapApi:
 
     def _list_map_jobs_v1_map_jobs_get_serialize(
         self,
-        url,
         status,
         start_date,
         end_date,
@@ -606,10 +596,6 @@ class MapApi:
 
         # process the path parameters
         # process the query parameters
-        if url is not None:
-
-            _query_params.append(('url', url))
-
         if status is not None:
 
             _query_params.append(('status', status.value))
@@ -743,6 +729,7 @@ class MapApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '408': "ErrorResponse",
             '422': "HTTPValidationError",
             '429': "ErrorResponse",
@@ -818,6 +805,7 @@ class MapApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '408': "ErrorResponse",
             '422': "HTTPValidationError",
             '429': "ErrorResponse",
@@ -893,6 +881,7 @@ class MapApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '408': "ErrorResponse",
             '422': "HTTPValidationError",
             '429': "ErrorResponse",

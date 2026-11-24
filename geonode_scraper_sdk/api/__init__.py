@@ -4,6 +4,7 @@
 from geonode_scraper_sdk.api.batch_api import BatchApi
 from geonode_scraper_sdk.api.crawl_api import CrawlApi
 from geonode_scraper_sdk.api.extraction_api import ExtractionApi
+from geonode_scraper_sdk.api.google_api import GoogleApi
 from geonode_scraper_sdk.api.map_api import MapApi
 from geonode_scraper_sdk.api.search_api import SearchApi
 from geonode_scraper_sdk.api.statistics_api import StatisticsApi

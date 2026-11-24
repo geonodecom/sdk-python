@@ -102,6 +102,7 @@ class ExtractionApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ExtractionErrorResponse",
             '422': "ExtractionErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -177,6 +178,7 @@ class ExtractionApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ExtractionErrorResponse",
             '422': "ExtractionErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -252,6 +254,7 @@ class ExtractionApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '402': "ErrorResponse",
+            '403': "ExtractionErrorResponse",
             '422': "ExtractionErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -614,8 +617,7 @@ class ExtractionApi:
     @validate_call
     def list_jobs_v1_extract_jobs_get(
         self,
-        job_id: Annotated[Optional[StrictStr], Field(description="Filter by job ID")] = None,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by target URL")] = None,
+        job_id: Annotated[Optional[StrictStr], Field(description="Filter by full job ID (exact match, UUID)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         output: Annotated[Optional[Any], Field(description="Filter by output format")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
@@ -637,12 +639,10 @@ class ExtractionApi:
     ) -> JobCollectionResponse:
         """List extraction jobs
 
-        List and filter extraction jobs by job ID, URL, status, output format, and date range
+        List and filter extraction jobs by full job ID (exact match), status, output format, and date range
 
-        :param job_id: Filter by job ID
+        :param job_id: Filter by full job ID (exact match, UUID)
         :type job_id: str
-        :param url: Filter by target URL
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param output: Filter by output format
@@ -679,7 +679,6 @@ class ExtractionApi:
 
         _param = self._list_jobs_v1_extract_jobs_get_serialize(
             job_id=job_id,
-            url=url,
             status=status,
             output=output,
             start_date=start_date,
@@ -694,6 +693,7 @@ class ExtractionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '404': "ErrorResponse",
             '422': "HTTPValidationError",
@@ -712,8 +712,7 @@ class ExtractionApi:
     @validate_call
     def list_jobs_v1_extract_jobs_get_with_http_info(
         self,
-        job_id: Annotated[Optional[StrictStr], Field(description="Filter by job ID")] = None,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by target URL")] = None,
+        job_id: Annotated[Optional[StrictStr], Field(description="Filter by full job ID (exact match, UUID)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         output: Annotated[Optional[Any], Field(description="Filter by output format")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
@@ -735,12 +734,10 @@ class ExtractionApi:
     ) -> ApiResponse[JobCollectionResponse]:
         """List extraction jobs
 
-        List and filter extraction jobs by job ID, URL, status, output format, and date range
+        List and filter extraction jobs by full job ID (exact match), status, output format, and date range
 
-        :param job_id: Filter by job ID
+        :param job_id: Filter by full job ID (exact match, UUID)
         :type job_id: str
-        :param url: Filter by target URL
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param output: Filter by output format
@@ -777,7 +774,6 @@ class ExtractionApi:
 
         _param = self._list_jobs_v1_extract_jobs_get_serialize(
             job_id=job_id,
-            url=url,
             status=status,
             output=output,
             start_date=start_date,
@@ -792,6 +788,7 @@ class ExtractionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '404': "ErrorResponse",
             '422': "HTTPValidationError",
@@ -810,8 +807,7 @@ class ExtractionApi:
     @validate_call
     def list_jobs_v1_extract_jobs_get_without_preload_content(
         self,
-        job_id: Annotated[Optional[StrictStr], Field(description="Filter by job ID")] = None,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by target URL")] = None,
+        job_id: Annotated[Optional[StrictStr], Field(description="Filter by full job ID (exact match, UUID)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         output: Annotated[Optional[Any], Field(description="Filter by output format")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
@@ -833,12 +829,10 @@ class ExtractionApi:
     ) -> RESTResponseType:
         """List extraction jobs
 
-        List and filter extraction jobs by job ID, URL, status, output format, and date range
+        List and filter extraction jobs by full job ID (exact match), status, output format, and date range
 
-        :param job_id: Filter by job ID
+        :param job_id: Filter by full job ID (exact match, UUID)
         :type job_id: str
-        :param url: Filter by target URL
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param output: Filter by output format
@@ -875,7 +869,6 @@ class ExtractionApi:
 
         _param = self._list_jobs_v1_extract_jobs_get_serialize(
             job_id=job_id,
-            url=url,
             status=status,
             output=output,
             start_date=start_date,
@@ -890,6 +883,7 @@ class ExtractionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
             '404': "ErrorResponse",
             '422': "HTTPValidationError",
@@ -904,7 +898,6 @@ class ExtractionApi:
     def _list_jobs_v1_extract_jobs_get_serialize(
         self,
         job_id,
-        url,
         status,
         output,
         start_date,
@@ -936,10 +929,6 @@ class ExtractionApi:
         if job_id is not None:
 
             _query_params.append(('job_id', job_id))
-
-        if url is not None:
-
-            _query_params.append(('url', url))
 
         if status is not None:
 

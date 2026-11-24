@@ -21,6 +21,7 @@ __all__ = [
     "BatchApi",
     "CrawlApi",
     "ExtractionApi",
+    "GoogleApi",
     "MapApi",
     "SearchApi",
     "StatisticsApi",
@@ -36,9 +37,12 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AiOverviewModel",
+    "AiSourceModel",
     "BatchAccepted",
     "BatchCancelled",
     "BatchConfig",
+    "BatchDownloadResponse",
     "BatchItemMetadata",
     "BatchJobsResponse",
     "BatchListItemResponse",
@@ -69,6 +73,11 @@ __all__ = [
     "ExtractionErrorCode",
     "ExtractionErrorResponse",
     "ExtractionMetadata",
+    "GoogleSearchLightPage",
+    "GoogleSearchLightRequest",
+    "GoogleSearchLightResponse",
+    "GoogleShoppingProductRequest",
+    "GoogleShoppingProductResponse",
     "HTTPValidationError",
     "HealthResponse",
     "HealthStatus",
@@ -96,6 +105,10 @@ __all__ = [
     "SearchListItemResponse",
     "SearchRequest",
     "SearchResponse",
+    "ShoppingInstallmentModel",
+    "ShoppingProductModel",
+    "ShoppingPromotionModel",
+    "ShoppingSellerModel",
     "StatisticsResponse",
     "TokensUsageResponse",
     "ValidationError",
@@ -113,6 +126,7 @@ __all__ = [
 from geonode_scraper_sdk.api.batch_api import BatchApi as BatchApi
 from geonode_scraper_sdk.api.crawl_api import CrawlApi as CrawlApi
 from geonode_scraper_sdk.api.extraction_api import ExtractionApi as ExtractionApi
+from geonode_scraper_sdk.api.google_api import GoogleApi as GoogleApi
 from geonode_scraper_sdk.api.map_api import MapApi as MapApi
 from geonode_scraper_sdk.api.search_api import SearchApi as SearchApi
 from geonode_scraper_sdk.api.statistics_api import StatisticsApi as StatisticsApi
@@ -132,9 +146,12 @@ from geonode_scraper_sdk.exceptions import ApiAttributeError as ApiAttributeErro
 from geonode_scraper_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from geonode_scraper_sdk.models.ai_overview_model import AiOverviewModel as AiOverviewModel
+from geonode_scraper_sdk.models.ai_source_model import AiSourceModel as AiSourceModel
 from geonode_scraper_sdk.models.batch_accepted import BatchAccepted as BatchAccepted
 from geonode_scraper_sdk.models.batch_cancelled import BatchCancelled as BatchCancelled
 from geonode_scraper_sdk.models.batch_config import BatchConfig as BatchConfig
+from geonode_scraper_sdk.models.batch_download_response import BatchDownloadResponse as BatchDownloadResponse
 from geonode_scraper_sdk.models.batch_item_metadata import BatchItemMetadata as BatchItemMetadata
 from geonode_scraper_sdk.models.batch_jobs_response import BatchJobsResponse as BatchJobsResponse
 from geonode_scraper_sdk.models.batch_list_item_response import BatchListItemResponse as BatchListItemResponse
@@ -165,6 +182,11 @@ from geonode_scraper_sdk.models.extraction_error import ExtractionError as Extra
 from geonode_scraper_sdk.models.extraction_error_code import ExtractionErrorCode as ExtractionErrorCode
 from geonode_scraper_sdk.models.extraction_error_response import ExtractionErrorResponse as ExtractionErrorResponse
 from geonode_scraper_sdk.models.extraction_metadata import ExtractionMetadata as ExtractionMetadata
+from geonode_scraper_sdk.models.google_search_light_page import GoogleSearchLightPage as GoogleSearchLightPage
+from geonode_scraper_sdk.models.google_search_light_request import GoogleSearchLightRequest as GoogleSearchLightRequest
+from geonode_scraper_sdk.models.google_search_light_response import GoogleSearchLightResponse as GoogleSearchLightResponse
+from geonode_scraper_sdk.models.google_shopping_product_request import GoogleShoppingProductRequest as GoogleShoppingProductRequest
+from geonode_scraper_sdk.models.google_shopping_product_response import GoogleShoppingProductResponse as GoogleShoppingProductResponse
 from geonode_scraper_sdk.models.http_validation_error import HTTPValidationError as HTTPValidationError
 from geonode_scraper_sdk.models.health_response import HealthResponse as HealthResponse
 from geonode_scraper_sdk.models.health_status import HealthStatus as HealthStatus
@@ -192,6 +214,10 @@ from geonode_scraper_sdk.models.search_jobs_response import SearchJobsResponse a
 from geonode_scraper_sdk.models.search_list_item_response import SearchListItemResponse as SearchListItemResponse
 from geonode_scraper_sdk.models.search_request import SearchRequest as SearchRequest
 from geonode_scraper_sdk.models.search_response import SearchResponse as SearchResponse
+from geonode_scraper_sdk.models.shopping_installment_model import ShoppingInstallmentModel as ShoppingInstallmentModel
+from geonode_scraper_sdk.models.shopping_product_model import ShoppingProductModel as ShoppingProductModel
+from geonode_scraper_sdk.models.shopping_promotion_model import ShoppingPromotionModel as ShoppingPromotionModel
+from geonode_scraper_sdk.models.shopping_seller_model import ShoppingSellerModel as ShoppingSellerModel
 from geonode_scraper_sdk.models.statistics_response import StatisticsResponse as StatisticsResponse
 from geonode_scraper_sdk.models.tokens_usage_response import TokensUsageResponse as TokensUsageResponse
 from geonode_scraper_sdk.models.validation_error import ValidationError as ValidationError

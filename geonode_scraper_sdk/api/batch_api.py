@@ -22,6 +22,7 @@ from typing_extensions import Annotated
 from uuid import UUID
 from geonode_scraper_sdk.models.batch_accepted import BatchAccepted
 from geonode_scraper_sdk.models.batch_cancelled import BatchCancelled
+from geonode_scraper_sdk.models.batch_download_response import BatchDownloadResponse
 from geonode_scraper_sdk.models.batch_jobs_response import BatchJobsResponse
 from geonode_scraper_sdk.models.batch_request import BatchRequest
 from geonode_scraper_sdk.models.batch_status_response import BatchStatusResponse
@@ -373,6 +374,8 @@ class BatchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BatchAccepted",
             '401': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -444,6 +447,8 @@ class BatchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BatchAccepted",
             '401': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -515,6 +520,8 @@ class BatchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "BatchAccepted",
             '401': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -588,6 +595,288 @@ class BatchApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/batch',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def download_batch_results_v1_batch_job_id_download_get(
+        self,
+        job_id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BatchDownloadResponse:
+        """Download all results of a batch as one zip
+
+        A temporary link to a zip of a finished batch: one file per successful URL in the batch's formats and a manifest.json of the URLs without a file. Asking again returns a new link to the same archive. While the zip is still being built the answer is 202 with a Retry-After header. Not charged.
+
+        :param job_id: (required)
+        :type job_id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_batch_results_v1_batch_job_id_download_get_serialize(
+            job_id=job_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchDownloadResponse",
+            '202': "ErrorResponse",
+            '401': None,
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '410': "ErrorResponse",
+            '422': "HTTPValidationError",
+            '503': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def download_batch_results_v1_batch_job_id_download_get_with_http_info(
+        self,
+        job_id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BatchDownloadResponse]:
+        """Download all results of a batch as one zip
+
+        A temporary link to a zip of a finished batch: one file per successful URL in the batch's formats and a manifest.json of the URLs without a file. Asking again returns a new link to the same archive. While the zip is still being built the answer is 202 with a Retry-After header. Not charged.
+
+        :param job_id: (required)
+        :type job_id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_batch_results_v1_batch_job_id_download_get_serialize(
+            job_id=job_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchDownloadResponse",
+            '202': "ErrorResponse",
+            '401': None,
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '410': "ErrorResponse",
+            '422': "HTTPValidationError",
+            '503': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def download_batch_results_v1_batch_job_id_download_get_without_preload_content(
+        self,
+        job_id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Download all results of a batch as one zip
+
+        A temporary link to a zip of a finished batch: one file per successful URL in the batch's formats and a manifest.json of the URLs without a file. Asking again returns a new link to the same archive. While the zip is still being built the answer is 202 with a Retry-After header. Not charged.
+
+        :param job_id: (required)
+        :type job_id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_batch_results_v1_batch_job_id_download_get_serialize(
+            job_id=job_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchDownloadResponse",
+            '202': "ErrorResponse",
+            '401': None,
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '410': "ErrorResponse",
+            '422': "HTTPValidationError",
+            '503': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _download_batch_results_v1_batch_job_id_download_get_serialize(
+        self,
+        job_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if job_id is not None:
+            _path_params['job_id'] = job_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/batch/{job_id}/download',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
