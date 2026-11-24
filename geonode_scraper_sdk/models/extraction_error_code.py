@@ -43,6 +43,8 @@ class ExtractionErrorCode(str, Enum):
     PAYMENT_REQUIRED = 'PAYMENT_REQUIRED'
     INTERNAL_ERROR = 'INTERNAL_ERROR'
     PROXY_ERROR = 'PROXY_ERROR'
+    TARGET_BLOCKED = 'TARGET_BLOCKED'
+    GOOGLE_SEARCH_MOVED = 'GOOGLE_SEARCH_MOVED'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -30,7 +30,7 @@ class SearchRequest(BaseModel):
     """ # noqa: E501
     engine: Optional[StrictStr] = None
     locale: Optional[StrictStr] = None
-    page: Optional[Annotated[int, Field(le=9, strict=True, ge=1)]] = Field(default=1, description="Result page to fetch. Without `engine`, 1 to 9. With `engine` set, the pinned engine's own limit applies instead: brave 9, duckduckgo 5, naver 9.")
+    page: Optional[Annotated[int, Field(le=9, strict=True, ge=1)]] = Field(default=1, description="Result page to fetch. Without `engine`, 1 to 9. With `engine` set, the pinned engine's own limit applies instead: duckduckgo 5, naver 9, yahoo 9.")
     query: Annotated[str, Field(min_length=1, strict=True, max_length=1000)] = Field(description="Search query")
     safe: Optional[StrictStr] = Field(default='off', description="Safe-search filtering level. Accepted values: \"off\", \"moderate\", or \"strict\".")
     time_range: Optional[StrictStr] = None
@@ -42,8 +42,8 @@ class SearchRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['brave', 'duckduckgo', 'naver']):
-            raise ValueError("must be one of enum values ('brave', 'duckduckgo', 'naver')")
+        if value not in set(['duckduckgo', 'yahoo', 'naver']):
+            raise ValueError("must be one of enum values ('duckduckgo', 'yahoo', 'naver')")
         return value
 
     @field_validator('safe')

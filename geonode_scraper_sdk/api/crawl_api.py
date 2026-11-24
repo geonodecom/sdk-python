@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import Any, Optional
 from typing_extensions import Annotated
 from uuid import UUID
@@ -373,7 +373,8 @@ class CrawlApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "CrawlAccepted",
             '401': None,
-            '402': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -445,7 +446,8 @@ class CrawlApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "CrawlAccepted",
             '401': None,
-            '402': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -517,7 +519,8 @@ class CrawlApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "CrawlAccepted",
             '401': None,
-            '402': None,
+            '402': "ErrorResponse",
+            '403': "ErrorResponse",
             '422': None,
             '429': None,
             '503': None,
@@ -913,7 +916,6 @@ class CrawlApi:
     @validate_call
     def list_crawl_jobs_v1_crawl_jobs_get(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by seed URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -936,8 +938,6 @@ class CrawlApi:
 
         List crawl jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by seed URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -971,7 +971,6 @@ class CrawlApi:
         """ # noqa: E501
 
         _param = self._list_crawl_jobs_v1_crawl_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -985,6 +984,7 @@ class CrawlApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CrawlJobsResponse",
+            '400': "ErrorResponse",
             '401': None,
             '422': "HTTPValidationError",
         }
@@ -1002,7 +1002,6 @@ class CrawlApi:
     @validate_call
     def list_crawl_jobs_v1_crawl_jobs_get_with_http_info(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by seed URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -1025,8 +1024,6 @@ class CrawlApi:
 
         List crawl jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by seed URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -1060,7 +1057,6 @@ class CrawlApi:
         """ # noqa: E501
 
         _param = self._list_crawl_jobs_v1_crawl_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -1074,6 +1070,7 @@ class CrawlApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CrawlJobsResponse",
+            '400': "ErrorResponse",
             '401': None,
             '422': "HTTPValidationError",
         }
@@ -1091,7 +1088,6 @@ class CrawlApi:
     @validate_call
     def list_crawl_jobs_v1_crawl_jobs_get_without_preload_content(
         self,
-        url: Annotated[Optional[StrictStr], Field(description="Filter by seed URL (partial match)")] = None,
         status: Annotated[Optional[Any], Field(description="Filter by job status")] = None,
         start_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or after this date")] = None,
         end_date: Annotated[Optional[datetime], Field(description="Filter jobs created on or before this date")] = None,
@@ -1114,8 +1110,6 @@ class CrawlApi:
 
         List crawl jobs for the authenticated user with optional filtering and pagination
 
-        :param url: Filter by seed URL (partial match)
-        :type url: str
         :param status: Filter by job status
         :type status: JobStatus
         :param start_date: Filter jobs created on or after this date
@@ -1149,7 +1143,6 @@ class CrawlApi:
         """ # noqa: E501
 
         _param = self._list_crawl_jobs_v1_crawl_jobs_get_serialize(
-            url=url,
             status=status,
             start_date=start_date,
             end_date=end_date,
@@ -1163,6 +1156,7 @@ class CrawlApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CrawlJobsResponse",
+            '400': "ErrorResponse",
             '401': None,
             '422': "HTTPValidationError",
         }
@@ -1175,7 +1169,6 @@ class CrawlApi:
 
     def _list_crawl_jobs_v1_crawl_jobs_get_serialize(
         self,
-        url,
         status,
         start_date,
         end_date,
@@ -1203,10 +1196,6 @@ class CrawlApi:
 
         # process the path parameters
         # process the query parameters
-        if url is not None:
-
-            _query_params.append(('url', url))
-
         if status is not None:
 
             _query_params.append(('status', status.value))

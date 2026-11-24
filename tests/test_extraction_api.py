@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 
 import pytest
+from pydantic import ValidationError
 
 from geonode_scraper_sdk.api.extraction_api import ExtractionApi
 from geonode_scraper_sdk.models.error_response import ErrorResponse
@@ -262,7 +263,6 @@ def test_list_jobs(extraction_api, mock_api_client, make_mock_http_response):
     ("kwargs", "expected_query"),
     [
         ({"job_id": "test-job-uuid"}, {"job_id": "test-job-uuid"}),
-        ({"url": "https://example.com/path?q=1"}, {"url": "https://example.com/path?q=1"}),
         ({"status": JobStatus.COMPLETED}, {"status": "completed"}),
         ({"output": OutputFormat.HTML}, {"output": "html"}),
         (
@@ -309,7 +309,6 @@ def test_list_jobs_serializes_all_filters_together(
     with patch.object(mock_api_client.rest_client.pool_manager, "request", return_value=mock_resp) as mock_req:
         extraction_api.list_jobs_v1_extract_jobs_get(
             job_id="test-job-uuid",
-            url="https://example.com/path?q=1",
             status=JobStatus.COMPLETED,
             output=OutputFormat.MARKDOWN,
             start_date=start,
@@ -321,7 +320,6 @@ def test_list_jobs_serializes_all_filters_together(
     query = get_request_details(mock_req)["query"]
     assert query == {
         "job_id": "test-job-uuid",
-        "url": "https://example.com/path?q=1",
         "status": "completed",
         "output": "markdown",
         "start_date": start.strftime(mock_api_client.configuration.datetime_format),
@@ -329,6 +327,12 @@ def test_list_jobs_serializes_all_filters_together(
         "page": "2",
         "page_size": "10",
     }
+
+
+def test_list_jobs_no_longer_accepts_a_url_filter(extraction_api):
+    # The API rejects `url` on job lists with 400, so the client refuses it before sending anything.
+    with pytest.raises(ValidationError):
+        extraction_api.list_jobs_v1_extract_jobs_get(url="https://example.com/path?q=1")
 
 
 @pytest.mark.parametrize(

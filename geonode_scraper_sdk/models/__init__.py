@@ -13,9 +13,12 @@
 """  # noqa: E501
 
 # import models into model package
+from geonode_scraper_sdk.models.ai_overview_model import AiOverviewModel
+from geonode_scraper_sdk.models.ai_source_model import AiSourceModel
 from geonode_scraper_sdk.models.batch_accepted import BatchAccepted
 from geonode_scraper_sdk.models.batch_cancelled import BatchCancelled
 from geonode_scraper_sdk.models.batch_config import BatchConfig
+from geonode_scraper_sdk.models.batch_download_response import BatchDownloadResponse
 from geonode_scraper_sdk.models.batch_item_metadata import BatchItemMetadata
 from geonode_scraper_sdk.models.batch_jobs_response import BatchJobsResponse
 from geonode_scraper_sdk.models.batch_list_item_response import BatchListItemResponse
@@ -46,6 +49,11 @@ from geonode_scraper_sdk.models.extraction_error import ExtractionError
 from geonode_scraper_sdk.models.extraction_error_code import ExtractionErrorCode
 from geonode_scraper_sdk.models.extraction_error_response import ExtractionErrorResponse
 from geonode_scraper_sdk.models.extraction_metadata import ExtractionMetadata
+from geonode_scraper_sdk.models.google_search_light_page import GoogleSearchLightPage
+from geonode_scraper_sdk.models.google_search_light_request import GoogleSearchLightRequest
+from geonode_scraper_sdk.models.google_search_light_response import GoogleSearchLightResponse
+from geonode_scraper_sdk.models.google_shopping_product_request import GoogleShoppingProductRequest
+from geonode_scraper_sdk.models.google_shopping_product_response import GoogleShoppingProductResponse
 from geonode_scraper_sdk.models.http_validation_error import HTTPValidationError
 from geonode_scraper_sdk.models.health_response import HealthResponse
 from geonode_scraper_sdk.models.health_status import HealthStatus
@@ -73,6 +81,10 @@ from geonode_scraper_sdk.models.search_jobs_response import SearchJobsResponse
 from geonode_scraper_sdk.models.search_list_item_response import SearchListItemResponse
 from geonode_scraper_sdk.models.search_request import SearchRequest
 from geonode_scraper_sdk.models.search_response import SearchResponse
+from geonode_scraper_sdk.models.shopping_installment_model import ShoppingInstallmentModel
+from geonode_scraper_sdk.models.shopping_product_model import ShoppingProductModel
+from geonode_scraper_sdk.models.shopping_promotion_model import ShoppingPromotionModel
+from geonode_scraper_sdk.models.shopping_seller_model import ShoppingSellerModel
 from geonode_scraper_sdk.models.statistics_response import StatisticsResponse
 from geonode_scraper_sdk.models.tokens_usage_response import TokensUsageResponse
 from geonode_scraper_sdk.models.validation_error import ValidationError

@@ -42,8 +42,8 @@ class StatisticsApi:
     @validate_call
     def get_statistics_v1_statistics_get(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago)")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now); a later end date is moved back to now")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,9 +61,9 @@ class StatisticsApi:
 
         Retrieve aggregated extraction statistics for a given date range
 
-        :param start_date: Filter by start date (defaults to 30 days ago)
+        :param start_date: Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up
         :type start_date: datetime
-        :param end_date: Filter by end date (defaults to now)
+        :param end_date: Filter by end date (defaults to now); a later end date is moved back to now
         :type end_date: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -115,8 +115,8 @@ class StatisticsApi:
     @validate_call
     def get_statistics_v1_statistics_get_with_http_info(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago)")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now); a later end date is moved back to now")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,9 +134,9 @@ class StatisticsApi:
 
         Retrieve aggregated extraction statistics for a given date range
 
-        :param start_date: Filter by start date (defaults to 30 days ago)
+        :param start_date: Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up
         :type start_date: datetime
-        :param end_date: Filter by end date (defaults to now)
+        :param end_date: Filter by end date (defaults to now); a later end date is moved back to now
         :type end_date: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -188,8 +188,8 @@ class StatisticsApi:
     @validate_call
     def get_statistics_v1_statistics_get_without_preload_content(
         self,
-        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago)")] = None,
-        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now)")] = None,
+        start_date: Annotated[Optional[datetime], Field(description="Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up")] = None,
+        end_date: Annotated[Optional[datetime], Field(description="Filter by end date (defaults to now); a later end date is moved back to now")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -207,9 +207,9 @@ class StatisticsApi:
 
         Retrieve aggregated extraction statistics for a given date range
 
-        :param start_date: Filter by start date (defaults to 30 days ago)
+        :param start_date: Filter by start date (defaults to 30 days ago). The window covers at most 366 days, counted back from the end of `end_date` (a date-only `end_date` includes its whole day); an older start is moved up
         :type start_date: datetime
-        :param end_date: Filter by end date (defaults to now)
+        :param end_date: Filter by end date (defaults to now); a later end date is moved back to now
         :type end_date: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
