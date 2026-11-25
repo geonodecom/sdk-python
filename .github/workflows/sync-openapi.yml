@@ -61,6 +61,9 @@ jobs:
 
       - name: Regenerate the SDK
         if: steps.sync.outputs.changed == 'true'
+        # Postprocessing writes what it could not fix on its own here instead of failing, so a pull request still opens.
+        env:
+          SYNC_NOTES: ${{ runner.temp }}/sync-notes.md
         run: bash scripts/generate.sh
 
       - name: Classify the change
@@ -128,6 +131,12 @@ jobs:
 
           {
             cat "$RUNNER_TEMP/summary.md"
+            if [ -s "$RUNNER_TEMP/sync-notes.md" ]; then
+              echo "## Needs attention"
+              echo
+              head -c 10000 "$RUNNER_TEMP/sync-notes.md"
+              echo
+            fi
             echo "## oasdiff: $KIND"
             echo
             echo '```text'

@@ -56,6 +56,13 @@ filtered_spec="$(mktemp)"
 trap 'rm -f "$filtered_spec"' EXIT
 "${postprocess_cmd[@]}" "$repo_root/openapi-generator/filter_spec.py" "$spec_file" "$filtered_spec"
 
+# The generator never deletes files, so modules the API dropped would linger; both folders are fully generated.
+if grep -qE '^/?geonode_scraper_sdk/(api|models)/' "$ignore_file"; then
+  printf '%s protects files in geonode_scraper_sdk/api or models, which this script deletes.\n' "$ignore_file" >&2
+  exit 1
+fi
+rm -rf "$sdk_dir/geonode_scraper_sdk/api" "$sdk_dir/geonode_scraper_sdk/models"
+
 # The API labels each request by the client named here (scraper-api#674); the token must
 # stay in the API's allowlist (app/shared/client_label.py).
 http_user_agent="geonode-python-sdk/${sdk_version}"
