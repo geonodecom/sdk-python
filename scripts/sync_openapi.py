@@ -180,7 +180,7 @@ def compare(old: dict, new: dict) -> SpecDiff:
 
 
 def changelog_entry(diff: SpecDiff) -> list[str]:
-    # No date here: the same spec must give the same commit on any night, so an unchanged sync pull request is left alone.
+    # No date here: the same spec must give the same commit every night, so an open sync PR is left alone.
     lines = ["- Synced with the production API spec."]
     listed = False
     for attr, _, label in _ROWS:
@@ -224,8 +224,8 @@ def summary_markdown(diff: SpecDiff, source: str, date: str) -> str:
         "",
         "- CI runs on this pull request. If a breaking change fails the tests, fix them in this branch: "
         "the nightly sync does not overwrite commits pushed by people.",
-        "- Removed parameters or fields can break `geonode-scraper-tools-core`, which calls this SDK. "
-        "Release a fixed tools-core before releasing this SDK.",
+        "- Removed parameters or fields break code that calls this SDK, including our packages built on it "
+        "(for the Python SDK, `geonode-scraper-tools-core`). Release fixed versions of those first.",
         "- Merging publishes nothing. A release is a separate version pull request and the manual Publish workflow.",
         "",
     ]

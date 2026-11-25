@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
+import os
+from functools import partial
 from pathlib import Path
+from typing import Callable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SDK_DIR = REPO_ROOT
+# Set by the nightly sync: problems that would stop generation become notes for its pull request instead.
+SYNC_NOTES = os.environ.get("SYNC_NOTES")
 
 
 def text(*parts: str) -> str:
@@ -156,9 +161,27 @@ def main() -> None:
         ],
     }
 
+    notes: list[str] = []
+
+    def problem(message: str) -> None:
+        if not SYNC_NOTES:
+            raise RuntimeError(message)
+        print(f"WARNING: {message}")
+        notes.append(message)
+
+    def run(path: Path, edit: Callable[[], bool]) -> None:
+        relative = path.relative_to(REPO_ROOT)
+        if not path.exists():
+            problem(f"`{relative}` is no longer generated; remove its edits from scripts/postprocess_generated.py.")
+            return
+        try:
+            if edit():
+                changed_files.append(path)
+        except RuntimeError as exc:
+            problem(f"`{relative}`: {exc}; the generated code changed, update scripts/postprocess_generated.py.")
+
     for path, replacements in replacement_map.items():
-        if apply_replacements(path, replacements):
-            changed_files.append(path)
+        run(path, partial(apply_replacements, path, replacements))
 
     # The generator leaves trailing spaces and blank lines; trimming them keeps regeneration diffs to real changes.
     trimmed = sum(normalize_whitespace(path) for path in sorted((SDK_DIR / "geonode_scraper_sdk").rglob("*.py")))
@@ -171,6 +194,10 @@ def main() -> None:
             print(f"- {path.relative_to(REPO_ROOT)}")
     else:
         print("Generated Python SDK files already normalized.")
+
+    if SYNC_NOTES and notes:
+        with open(SYNC_NOTES, "a", encoding="utf-8") as fh:
+            fh.writelines(f"- {note}\n" for note in notes)
 
 
 if __name__ == "__main__":
