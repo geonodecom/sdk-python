@@ -6,6 +6,7 @@ The format is inspired by Keep a Changelog.
 
 ## [Unreleased]
 
+- If you use `geonode-scraper-tools-core`, directly or through the Geonode CLI, LangChain or CrewAI packages, upgrade it to 0.6.0 or newer before this SDK. Older versions pass the job list filters removed below, so every job list fails with this release.
 - Synced with the production API spec.
   - New endpoints: `GET /v1/batch/{job_id}/download`, `POST /v1/google/search/light`, `POST /v1/google/shopping/product`.
   - Removed request parameters: `url` on `GET /v1/crawl/jobs`, `url` on `GET /v1/extract/jobs`, `url` on `GET /v1/map/jobs`, `query` on `GET /v1/search/jobs`.
