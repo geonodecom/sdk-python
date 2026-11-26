@@ -6,9 +6,11 @@ The format is inspired by Keep a Changelog.
 
 ## [Unreleased]
 
+- Removed the outdated generated API and model pages from `docs/`; they predate several endpoints and were linked from nowhere. `docs/guide.md` is the reference.
+
 ## [0.7.0] - 2026-11-26
 
-- If you use `geonode-scraper-tools-core`, directly or through the Geonode CLI, LangChain or CrewAI packages, upgrade it to 0.6.0 or newer before this SDK. Older versions pass the job list filters removed below, so every job list fails with this release.
+- If you use `geonode-scraper-tools-core`, directly or through the Geonode CLI, LangChain or CrewAI packages, upgrade it to 0.6.0 or newer before this SDK. Older versions pass the job list filters removed below, so the extract, crawl, map and search job lists fail with this release; the batch one is not affected.
 - Synced with the production API spec.
   - New endpoints: `GET /v1/batch/{job_id}/download`, `POST /v1/google/search/light`, `POST /v1/google/shopping/product`.
   - Removed request parameters: `url` on `GET /v1/crawl/jobs`, `url` on `GET /v1/extract/jobs`, `url` on `GET /v1/map/jobs`, `query` on `GET /v1/search/jobs`.
