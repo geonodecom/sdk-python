@@ -42,10 +42,11 @@ class CrawlStatusResponse(BaseModel):
     job_id: UUID
     results: Optional[List[CrawlPageItem]] = None
     status: JobStatus
+    stop_reason: Optional[StrictStr] = None
     token_summary: CrawlTokenSummary
     total_pages: Optional[StrictInt] = Field(default=0, description="Total crawl pages discovered so far, not pagination page count")
     url: StrictStr
-    __properties: ClassVar[List[str]] = ["cancelled_pages", "completed_at", "completed_pages", "crawl_config", "created_at", "failed_pages", "job_id", "results", "status", "token_summary", "total_pages", "url"]
+    __properties: ClassVar[List[str]] = ["cancelled_pages", "completed_at", "completed_pages", "crawl_config", "created_at", "failed_pages", "job_id", "results", "status", "stop_reason", "token_summary", "total_pages", "url"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -114,6 +115,11 @@ class CrawlStatusResponse(BaseModel):
         if self.results is None and "results" in self.model_fields_set:
             _dict['results'] = None
 
+        # set to None if stop_reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.stop_reason is None and "stop_reason" in self.model_fields_set:
+            _dict['stop_reason'] = None
+
         return _dict
 
     @classmethod
@@ -135,6 +141,7 @@ class CrawlStatusResponse(BaseModel):
             "job_id": obj.get("job_id"),
             "results": [CrawlPageItem.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "status": obj.get("status"),
+            "stop_reason": obj.get("stop_reason"),
             "token_summary": CrawlTokenSummary.from_dict(obj["token_summary"]) if obj.get("token_summary") is not None else None,
             "total_pages": obj.get("total_pages") if obj.get("total_pages") is not None else 0,
             "url": obj.get("url")

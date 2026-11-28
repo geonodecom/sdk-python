@@ -336,7 +336,7 @@ class CrawlApi:
     ) -> CrawlAccepted:
         """Start a crawl job
 
-        Crawl a website starting from a seed URL up to a given depth and page limit
+        Crawl a website starting from a seed URL up to a given depth and page limit. A job stops starting new pages 24 hours after its first reservation: pages already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param crawl_request: (required)
         :type crawl_request: CrawlRequest
@@ -409,7 +409,7 @@ class CrawlApi:
     ) -> ApiResponse[CrawlAccepted]:
         """Start a crawl job
 
-        Crawl a website starting from a seed URL up to a given depth and page limit
+        Crawl a website starting from a seed URL up to a given depth and page limit. A job stops starting new pages 24 hours after its first reservation: pages already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param crawl_request: (required)
         :type crawl_request: CrawlRequest
@@ -482,7 +482,7 @@ class CrawlApi:
     ) -> RESTResponseType:
         """Start a crawl job
 
-        Crawl a website starting from a seed URL up to a given depth and page limit
+        Crawl a website starting from a seed URL up to a given depth and page limit. A job stops starting new pages 24 hours after its first reservation: pages already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param crawl_request: (required)
         :type crawl_request: CrawlRequest

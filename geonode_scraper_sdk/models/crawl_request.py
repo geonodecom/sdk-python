@@ -34,7 +34,7 @@ class CrawlRequest(BaseModel):
     depth: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=2, description="Maximum BFS depth from the seed URL (1 = seed only)")
     formats: Optional[List[OutputFormat]] = Field(default=None, description="Output formats to extract per page")
     include_subdomains: Optional[StrictBool] = Field(default=False, description="When same_domain_only is true, also include subdomains of the seed domain")
-    limit: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = Field(default=50, description="Maximum number of pages to crawl")
+    limit: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = Field(default=50, description="Maximum number of pages to crawl. A job stops starting new pages 24 hours after its first reservation: pages already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.")
     proxy: Optional[ProxySettings] = None
     render_js: Optional[StrictBool] = Field(default=False, description="Use a headless browser to render each page (slower, handles JS-heavy sites)")
     same_domain_only: Optional[StrictBool] = Field(default=True, description="Only follow links that stay on the same domain as the seed URL")

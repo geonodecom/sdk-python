@@ -36,7 +36,7 @@ class BatchRequest(BaseModel):
     ignore_invalid_urls: Optional[StrictBool] = Field(default=True, description="If true, invalid URLs are skipped and returned in invalid_urls instead of failing the request")
     proxy: Optional[ProxySettings] = Field(default=None, description="Proxy configuration")
     render_js: Optional[StrictBool] = Field(default=False, description="If true, uses a headless browser to render the page for every batch item")
-    urls: Annotated[List[StrictStr], Field(min_length=1, max_length=1000)] = Field(description="URLs to extract in one batch")
+    urls: Annotated[List[StrictStr], Field(min_length=1, max_length=1000)] = Field(description="URLs to extract in one batch. A job stops starting new URLs 24 hours after its first reservation: URLs already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.")
     wait_config: Optional[WaitConfig] = None
     __properties: ClassVar[List[str]] = ["formats", "headers", "ignore_invalid_urls", "proxy", "render_js", "urls", "wait_config"]
 

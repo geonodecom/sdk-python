@@ -44,9 +44,10 @@ class BatchStatusResponse(BaseModel):
     pending_urls: Optional[StrictInt] = 0
     results: Optional[List[BatchResultItem]] = None
     status: JobStatus
+    stop_reason: Optional[StrictStr] = None
     token_summary: BatchTokenSummary
     total_urls: Optional[StrictInt] = Field(default=0, description="Number of accepted URLs in the batch")
-    __properties: ClassVar[List[str]] = ["batch_config", "cancelled_urls", "completed_at", "completed_urls", "created_at", "failed_urls", "invalid_urls", "job_id", "pending_urls", "results", "status", "token_summary", "total_urls"]
+    __properties: ClassVar[List[str]] = ["batch_config", "cancelled_urls", "completed_at", "completed_urls", "created_at", "failed_urls", "invalid_urls", "job_id", "pending_urls", "results", "status", "stop_reason", "token_summary", "total_urls"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -115,6 +116,11 @@ class BatchStatusResponse(BaseModel):
         if self.results is None and "results" in self.model_fields_set:
             _dict['results'] = None
 
+        # set to None if stop_reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.stop_reason is None and "stop_reason" in self.model_fields_set:
+            _dict['stop_reason'] = None
+
         return _dict
 
     @classmethod
@@ -138,6 +144,7 @@ class BatchStatusResponse(BaseModel):
             "pending_urls": obj.get("pending_urls") if obj.get("pending_urls") is not None else 0,
             "results": [BatchResultItem.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "status": obj.get("status"),
+            "stop_reason": obj.get("stop_reason"),
             "token_summary": BatchTokenSummary.from_dict(obj["token_summary"]) if obj.get("token_summary") is not None else None,
             "total_urls": obj.get("total_urls") if obj.get("total_urls") is not None else 0
         })
