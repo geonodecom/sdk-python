@@ -337,7 +337,7 @@ class BatchApi:
     ) -> BatchAccepted:
         """Start a batch extraction job
 
-        Queue a batch of URLs for asynchronous extraction
+        Queue a batch of URLs for asynchronous extraction. A job stops starting new URLs 24 hours after its first reservation: URLs already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param batch_request: (required)
         :type batch_request: BatchRequest
@@ -410,7 +410,7 @@ class BatchApi:
     ) -> ApiResponse[BatchAccepted]:
         """Start a batch extraction job
 
-        Queue a batch of URLs for asynchronous extraction
+        Queue a batch of URLs for asynchronous extraction. A job stops starting new URLs 24 hours after its first reservation: URLs already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param batch_request: (required)
         :type batch_request: BatchRequest
@@ -483,7 +483,7 @@ class BatchApi:
     ) -> RESTResponseType:
         """Start a batch extraction job
 
-        Queue a batch of URLs for asynchronous extraction
+        Queue a batch of URLs for asynchronous extraction. A job stops starting new URLs 24 hours after its first reservation: URLs already running finish, the rest are cancelled and not charged, and the job completes with stop_reason `time_limit`.
 
         :param batch_request: (required)
         :type batch_request: BatchRequest

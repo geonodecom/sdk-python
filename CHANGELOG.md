@@ -6,6 +6,8 @@ The format is inspired by Keep a Changelog.
 
 ## [Unreleased]
 
+- Synced with the production API spec.
+  - New model fields: `BatchStatusResponse.stop_reason`, `CrawlStatusResponse.stop_reason`.
 - Removed the outdated generated API and model pages from `docs/`; they predate several endpoints and were linked from nowhere. `docs/guide.md` is the reference.
 
 ## [0.7.0] - 2026-11-26
